@@ -16,6 +16,8 @@ import { ErrorComponent } from './error/error.component';
 import { AppRoutingModule } from './shared/app.routing';
 import { ApiService } from './shared/api.service';
 import { HomeResolver } from './shared/home-resolver.service';
+import { FiltersComponent } from './filters/filters.component';
+import { ActionsComponent } from './actions/actions.component';
 
 
 @NgModule({
@@ -23,7 +25,9 @@ import { HomeResolver } from './shared/home-resolver.service';
     AppComponent,
     HomeComponent,
     ErrorComponent,
-    LoaderComponent
+    LoaderComponent,
+    FiltersComponent,
+    ActionsComponent
   ],
   imports: [
     BrowserModule,

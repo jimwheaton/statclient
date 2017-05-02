@@ -1,0 +1,47 @@
+<md-card>
+
+  <div class="app-filter-control">
+    <md-select placeholder="Site">
+      <md-option *ngFor="let site of sites" [value]="site">{{site}}</md-option>
+    </md-select>
+  </div>
+
+  <div class="app-filter-control">
+    <md-select placeholder="Market">
+      <md-option *ngFor="let market of markets" [value]="market">{{market}}</md-option>
+    </md-select>
+  </div>
+
+  <div class="app-filter-control">
+    <md-select placeholder="Device">
+      <md-option *ngFor="let device of devices" [value]="device">{{device}}</md-option>
+    </md-select>
+  </div>
+
+  <div class="app-filter-control">
+    <md-select placeholder="Start date">
+      <md-option *ngFor="let date of dates" [value]="date">{{date}}</md-option>
+    </md-select>
+  </div>
+
+  <div class="app-filter-control">
+    <md-select placeholder="End date">
+      <md-option *ngFor="let date of dates" [value]="date">{{date}}</md-option>
+    </md-select>
+  </div>
+
+  <div class="app-filter-control">
+    <md-input-container>
+      <input mdInput placeholder="Keyword" [mdAutocomplete]="auto" [formControl]="keywordCtrl">
+    </md-input-container>
+
+    <md-autocomplete #auto="mdAutocomplete">
+      <md-option *ngFor="let keyword of filteredKeywords | async" [value]="keyword">
+        {{ keyword }}
+      </md-option>
+    </md-autocomplete>
+  </div>
+
+
+
+</md-card>
