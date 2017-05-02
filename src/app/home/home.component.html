@@ -1,0 +1,13 @@
+
+<md-grid-list cols="1">
+
+</md-grid-list>
+<md-input-container>
+  <input mdInput placeholder="Keyword" [mdAutocomplete]="auto" [formControl]="keywordCtrl">
+</md-input-container>
+
+<md-autocomplete #auto="mdAutocomplete">
+  <md-option *ngFor="let keyword of filteredKeywords | async" [value]="keyword">
+    {{ keyword }}
+  </md-option>
+</md-autocomplete>
