@@ -1,7 +1,8 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import {FormControl} from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/startWith';
+
 
 import { ActivatedRoute } from '@angular/router';
 
@@ -12,7 +13,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class FiltersComponent implements OnInit {
 
-  @Input() public keywords:string[];
+  @Input() public keywords:Observable<string[]>;
   @Input() sites:string[];
   @Input() devices:string[];
   @Input() markets:string[];
@@ -22,6 +23,7 @@ export class FiltersComponent implements OnInit {
 
   keywordCtrl: FormControl;
   filteredKeywords: any;
+  keywordsForAutoComplete:string[];
 
   constructor() {
     this.keywordCtrl = new FormControl();
@@ -31,11 +33,15 @@ export class FiltersComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.keywords.subscribe(keywords => {
+      this.keywordsForAutoComplete = keywords;
+      this.filteredKeywords = this.keywords;
+    });
   }
 
   filterKeywords(val: string) {
-    return val ? this.keywords.filter(s => new RegExp(`^${val}`, 'gi').test(s))
-               : this.keywords;
+    return val ? this.keywordsForAutoComplete.filter(s => new RegExp(`^${val}`, 'gi').test(s))
+               : this.keywordsForAutoComplete;
   }
 
   filterChanged(filter, value) {

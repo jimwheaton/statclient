@@ -1,4 +1,4 @@
-<app-filters [keywords]="autocompleteKeywords" 
+<app-filters [keywords]="keywords$" 
   [sites]="sites$" 
   [markets]="markets$" 
   [devices]="devices$"
@@ -7,8 +7,10 @@
 </app-filters>
 
 <md-grid-list cols="12" [gutterSize]="20" [rowHeight]="200">
+  <md-grid-tile [colspan]="12"><app-uploader></app-uploader></md-grid-tile>
   <md-grid-tile [colspan]="4">
     <app-action-panel (onRankings)="onRankings($event)"></app-action-panel>
+    
   </md-grid-tile>
   <md-grid-tile [colspan]="8">
     <md-card>

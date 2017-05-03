@@ -22,7 +22,9 @@ export class LoaderComponent implements OnInit {
     ngOnInit() { 
         this.subscription = this.loaderService.loaderState
             .subscribe((state: LoaderState) => {
+                
                 this.show = state.show;
+                console.log("loader " + this.show);
             });
     }
 

@@ -32,9 +32,9 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.keywords$.subscribe(keywords => {
-      this.autocompleteKeywords = keywords
-    });
+    // this.keywords$.subscribe(keywords => {
+    //   this.autocompleteKeywords = keywords
+    // });
   }
 
   filterChanged(event) {

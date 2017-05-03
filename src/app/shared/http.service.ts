@@ -12,11 +12,12 @@ import {
 } from '@angular/http';
 
 import { LoaderService } from './loader/loader.service';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class HttpService extends Http {
 
-    apiUrl = 'http://localhost:61388/';
+    api = environment.api
 
     constructor(
         backend: XHRBackend,
@@ -57,7 +58,7 @@ export class HttpService extends Http {
     }
 
     private getFullUrl(url: string): string {
-        return this.apiUrl + url;
+        return this.api + url;
     }
 
     private onCatch(error: any, caught: Observable<any>): Observable<any> {

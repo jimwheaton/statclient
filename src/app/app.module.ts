@@ -5,6 +5,7 @@ import { HttpModule, XHRBackend, RequestOptions } from '@angular/http';
 import { MaterialModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgReduxModule, NgRedux } from '@angular-redux/store';
+import { FileUploadModule } from 'ng2-file-upload/ng2-file-upload';
 
 import { HttpService } from './shared/http.service';
 import { httpServiceFactory } from './shared/http-factory.service';
@@ -21,6 +22,7 @@ import { FiltersComponent } from './filters/filters.component';
 import { ActionPanelComponent } from './action-panel/action-panel.component';
 import { store, IAppState } from './store';
 import { StatActions } from './store';
+import { UploaderComponent } from './uploader/uploader.component';
 
 
 @NgModule({
@@ -30,7 +32,8 @@ import { StatActions } from './store';
     ErrorComponent,
     LoaderComponent,
     FiltersComponent,
-    ActionPanelComponent
+    ActionPanelComponent,
+    UploaderComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +43,8 @@ import { StatActions } from './store';
     BrowserAnimationsModule,
     MaterialModule,
     AppRoutingModule,
-    NgReduxModule
+    NgReduxModule,
+    FileUploadModule
   ],
   providers: [
     ApiService,
