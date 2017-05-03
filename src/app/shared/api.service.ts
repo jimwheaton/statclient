@@ -3,6 +3,10 @@ import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { HttpService } from './http.service';
 import { IRanking, ISite, IDevice, IMarket, IKeyword } from './model';
+declare var require: any
+var download = require("downloadjs");
+
+
 
 @Injectable()
 export class ApiService {
@@ -15,20 +19,23 @@ export class ApiService {
     });
   }
 
-  getRankings(site:string, 
-              market:string, 
-              device:string, 
-              start:string, 
-              end:string,
-               keyword: string,
-               weighted:boolean,
-               csv:boolean): Observable<IRanking[]> {
+  getRankings(site: string,
+    market: string,
+    device: string,
+    start: string,
+    end: string,
+    keyword: string,
+    weighted: boolean,
+    csv: boolean): Observable<IRanking[]> {
 
-    let queryString:string =`?site=${site}&market=${market}&device=${device}&start=${start}&end=${end}&weighted=${weighted}&keyword=${keyword}`;
+    csv = true;
+    let queryString: string = `?site=${site}&market=${market}&device=${device}&start=${start}&end=${end}&weighted=${weighted}&keyword=${keyword}`;
     let asCsv = csv ? '.csv' : '';
-    
+
     return this.http.get(`api/rankings${asCsv}${queryString}`).map((response) => {
-      return <IRanking[]>response.json();
+      return csv 
+        ? download(response.text(), "rankings.csv", "text/csv") 
+        : <IRanking[]>response.json();
     }).catch(this.handleError);
   }
 

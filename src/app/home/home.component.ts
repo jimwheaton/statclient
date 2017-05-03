@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit {
 
   title = 'STAT';
   lookups: any;
-  autocompleteKeywords: string[];
+
   @select('sites') sites$: Observable<string[]>;
   @select('markets') markets$: Observable<string[]>;
   @select('devices') devices$: Observable<string[]>;
@@ -28,14 +28,11 @@ export class HomeComponent implements OnInit {
   @select('dates') dates$: Observable<string[]>;
 
   constructor(private ngRedux: NgRedux<IAppState>,
-    private actions: StatActions) {
+    private actions: StatActions,
+    private api:ApiService) {
   }
 
-  ngOnInit() {
-    // this.keywords$.subscribe(keywords => {
-    //   this.autocompleteKeywords = keywords
-    // });
-  }
+  ngOnInit() {}
 
   filterChanged(event) {
     let action;
@@ -56,7 +53,19 @@ export class HomeComponent implements OnInit {
   }
 
   onRankings(event) {
+    // const s = this.ngRedux.getState();
+        
+    //    this.api.getRankingsCsv(
+    //         s.site, 
+    //         s.market,
+    //         s.device,
+    //         s.startDate,
+    //         s.endDate,
+    //         s.keyword,
+    //         false,
+    //         true);
     return this.actions.getKeywordRanks();
   }
+
 }
 

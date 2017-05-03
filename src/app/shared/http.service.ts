@@ -45,7 +45,6 @@ export class HttpService extends Http {
     }
 
     private requestOptions(options?: RequestOptionsArgs): RequestOptionsArgs {
-
         if (options == null) {
             options = new RequestOptions();
         }
