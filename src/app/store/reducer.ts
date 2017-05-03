@@ -81,11 +81,11 @@ function storeRankings(state: IAppState, action, weighted:boolean) {
 function storeLookups(state: IAppState, action) {
     let l = action.lookups;
     return Object.assign({}, state, {
-        sites: l.sites,
-        markets: l.markets,
-        devices: l.devices,
-        dates: l.dates,
-        keywords: l.keywords
+        sites: ['', ...l.sites],
+        markets: ['', ...l.markets],
+        devices: ['', ...l.devices],
+        dates: ['', ...l.dates],
+        keywords: ['', ...l.keywords]
     });
 }
 
