@@ -8,8 +8,7 @@ import { HomeResolver } from "./home-resolver.service";
 @NgModule({
     imports: [
         RouterModule.forRoot([
-            { path: '', component: HomeComponent, resolve: { lookups: HomeResolver} },
-            { path: '**', component: ErrorComponent }
+            { path: '**', component: HomeComponent, resolve: { lookups: HomeResolver} }
         ])
     ],
     exports: [

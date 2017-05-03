@@ -19,7 +19,6 @@ import { AppRoutingModule } from './shared/app.routing';
 import { ApiService } from './shared/api.service';
 import { HomeResolver } from './shared/home-resolver.service';
 import { FiltersComponent } from './filters/filters.component';
-import { ActionPanelComponent } from './action-panel/action-panel.component';
 import { store, IAppState } from './store';
 import { StatActions } from './store';
 import { UploaderComponent } from './uploader/uploader.component';
@@ -32,7 +31,6 @@ import { UploaderComponent } from './uploader/uploader.component';
     ErrorComponent,
     LoaderComponent,
     FiltersComponent,
-    ActionPanelComponent,
     UploaderComponent
   ],
   imports: [
