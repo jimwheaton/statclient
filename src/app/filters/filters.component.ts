@@ -3,9 +3,6 @@ import {FormControl} from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/startWith';
 
-
-import { ActivatedRoute } from '@angular/router';
-
 @Component({
   selector: 'app-filters',
   templateUrl: './filters.component.html',
@@ -21,21 +18,23 @@ export class FiltersComponent implements OnInit {
 
   @Output() change:EventEmitter<any> = new EventEmitter();
 
+  keywordsForAutoComplete:string[];
   keywordCtrl: FormControl;
   filteredKeywords: any;
-  keywordsForAutoComplete:string[];
-
+  
   constructor() {
     this.keywordCtrl = new FormControl();
+    
     this.filteredKeywords = this.keywordCtrl.valueChanges
         .startWith(null)
+        .do((name) => this.filterChanged('KEYWORD', name))
         .map(name => this.filterKeywords(name));
   }
 
   ngOnInit() {
     this.keywords.subscribe(keywords => {
       this.keywordsForAutoComplete = keywords;
-      this.filteredKeywords = this.keywords;
+      this.keywordCtrl.setValue(null);
     });
   }
 

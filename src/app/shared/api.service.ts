@@ -24,18 +24,10 @@ export class ApiService {
                weighted:boolean,
                csv:boolean): Observable<IRanking[]> {
 
-    let params: URLSearchParams = new URLSearchParams();
-    params.set('site', site);
-    params.set('market', market);
-    params.set('device', device);
-    params.set('start', start);
-    params.set('end', end);
-    params.set('keyword', keyword);
-    params.set('weighted', weighted.toString());
-
+    let queryString:string =`?site=${site}&market=${market}&device=${device}&start=${start}&end=${end}&weighted=${weighted}&keyword=${keyword}`;
     let asCsv = csv ? '.csv' : '';
     
-    return this.http.get(`api/rankings${asCsv}`, { search: params }).map((response) => {
+    return this.http.get(`api/rankings${asCsv}${queryString}`).map((response) => {
       return <IRanking[]>response.json();
     }).catch(this.handleError);
   }
