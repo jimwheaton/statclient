@@ -1,8 +1,14 @@
-<md-card [ngClass]="{'drop-zone-file-over': hasFileOverDropZone}" class="drop-zone" >
-<div ng2FileDrop (fileOver)="fileOverDropZone($event)" [uploader]="uploader">
-  Drop .csv file here
+<div class="fileContainer">
+  <button class="csv-upload-button" md-raised-button [disabled]="isUploadDisabled">
+    <i class="material-icons">file_upload</i>
+  </button>
+  <input #uploadEl type="file" ng2FileSelect [uploader]="uploader" />
 </div>
-</md-card>
+<!--<md-card [ngClass]="{'drop-zone-file-over': hasFileOverDropZone}" class="drop-zone" ng2FileDrop (fileOver)="fileOverDropZone($event)"
+  [uploader]="uploader">
+  Drop CSV file here to upload
+</md-card>-->
 
-<input type="file" ng2FileSelect [uploader]="uploader" />
-<button md-raised-button (click)="upload()" [disabled]="uploadButtonDisabled()">Import</button>
+
+
+<!--<button class="csv-upload-button" md-raised-button (click)="upload()" [disabled]="uploadButtonDisabled()" tooltip="Upload"><i class="material-icons">file_upload</i></button>-->

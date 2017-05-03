@@ -1,22 +1,7 @@
-<app-filters [keywords]="keywords$" 
-  [sites]="sites$" 
-  [markets]="markets$" 
-  [devices]="devices$"
-  [dates]="dates$"
-  (change)="filterChanged($event)"
-  (onRankings)="onRankings()"
-  (onDownload)="onDownload()">
+<app-filters [keywords]="keywords$" [sites]="sites$" [markets]="markets$" [devices]="devices$" [dates]="dates$" (change)="filterChanged($event)"
+  (onRankings)="onRankings()" (onDownload)="onDownload()">
 </app-filters>
 
-<md-grid-list cols="12" [gutterSize]="20" [rowHeight]="200">
-  <md-grid-tile [colspan]="12"><app-uploader></app-uploader></md-grid-tile>
-  <md-grid-tile [colspan]="4">
-   
-    
-  </md-grid-tile>
-  <md-grid-tile [colspan]="8">
-    <md-card>
-      Visiualizations here
-    </md-card>
-  </md-grid-tile>
-</md-grid-list>
+<md-card>
+  Visiualizations here
+</md-card>
