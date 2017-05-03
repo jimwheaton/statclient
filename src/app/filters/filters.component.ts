@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import {FormControl} from '@angular/forms';
 import 'rxjs/add/operator/startWith';
 import { ActivatedRoute } from '@angular/router';
@@ -16,6 +16,8 @@ export class FiltersComponent implements OnInit {
   @Input() markets:string[];
   @Input() dates:string[];
 
+  @Output() change:EventEmitter<any> = new EventEmitter();
+
   keywordCtrl: FormControl;
   filteredKeywords: any;
 
@@ -32,6 +34,10 @@ export class FiltersComponent implements OnInit {
   filterKeywords(val: string) {
     return val ? this.keywords.filter(s => new RegExp(`^${val}`, 'gi').test(s))
                : this.keywords;
+  }
+
+  filterChanged(filter, value) {
+    this.change.emit({filter, value});    
   }
 
 }

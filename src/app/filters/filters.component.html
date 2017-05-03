@@ -1,7 +1,7 @@
 <md-card>
 
   <div class="app-filter-control">
-    <md-select placeholder="Site">
+    <md-select #site placeholder="Site" (change)="filterChanged('SITE', site.selected.value)">
       <md-option *ngFor="let site of sites" [value]="site">{{site}}</md-option>
     </md-select>
   </div>
@@ -13,7 +13,7 @@
   </div>
 
   <div class="app-filter-control">
-    <md-select placeholder="Device">
+    <md-select #device placeholder="Device" (change)="filterChanged('DEVICE', device.selected.value)">
       <md-option *ngFor="let device of devices" [value]="device">{{device}}</md-option>
     </md-select>
   </div>
