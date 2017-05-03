@@ -1,4 +1,4 @@
-import { IRankingResult } from '../shared/model';
+import { IRanking } from '../shared/model';
 
 export interface IAppState {
     keywords: string[],
@@ -12,6 +12,6 @@ export interface IAppState {
     site: string,
     startDate: string,
     endDate: string,
-    rankingResults:IRankingResult[],
-    weightedRankingResults:IRankingResult[]
+    rankings:IRanking[],
+    weightedRankings:IRanking[]
 }

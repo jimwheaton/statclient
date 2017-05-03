@@ -1,14 +1,14 @@
-<app-filters [keywords]="lookups.keywords" 
-  [sites]="lookups.sites" 
-  [markets]="lookups.markets" 
-  [devices]="lookups.devices"
-  [dates]="lookups.dates"
+<app-filters [keywords]="autocompleteKeywords" 
+  [sites]="sites$" 
+  [markets]="markets$" 
+  [devices]="devices$"
+  [dates]="dates$"
   (change)="filterChanged($event)">
 </app-filters>
 
 <md-grid-list cols="12" [gutterSize]="20" [rowHeight]="200">
   <md-grid-tile [colspan]="4">
-    <app-action-panel></app-action-panel>
+    <app-action-panel (onRankings)="onRankings($event)"></app-action-panel>
   </md-grid-tile>
   <md-grid-tile [colspan]="8">
     <md-card>

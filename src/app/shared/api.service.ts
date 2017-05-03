@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { HttpService } from './http.service';
-import { IRankingResult, ISite, IDevice, IMarket, IKeyword } from './model';
+import { IRanking, ISite, IDevice, IMarket, IKeyword } from './model';
 
 @Injectable()
 export class ApiService {
@@ -15,14 +15,29 @@ export class ApiService {
     });
   }
 
-  getRankings(keyword: string): Observable<IRankingResult[]> {
-    return this.http.get("http://localhost:61388/api/rankings").map((response) => {
-      return <IRankingResult[]>response.json();
+  getRankings(site:string, 
+              market:string, 
+              device:string, 
+              start:string, 
+              end:string,
+               keyword: string,
+               weighted:boolean,
+               csv:boolean): Observable<IRanking[]> {
+
+    let params: URLSearchParams = new URLSearchParams();
+    params.set('site', site);
+    params.set('market', market);
+    params.set('device', device);
+    params.set('start', start);
+    params.set('end', end);
+    params.set('keyword', keyword);
+    params.set('weighted', weighted.toString());
+
+    let asCsv = csv ? '.csv' : '';
+    
+    return this.http.get(`api/rankings${asCsv}`, { search: params }).map((response) => {
+      return <IRanking[]>response.json();
     }).catch(this.handleError);
-  }
-
-  getWeightedRankings() {
-
   }
 
   private handleError(error: Response) {

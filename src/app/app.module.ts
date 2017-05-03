@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule, XHRBackend, RequestOptions } from '@angular/http';
 import { MaterialModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgReduxModule, NgRedux } from '@angular-redux/store';
 
 import { HttpService } from './shared/http.service';
 import { httpServiceFactory } from './shared/http-factory.service';
@@ -18,6 +19,8 @@ import { ApiService } from './shared/api.service';
 import { HomeResolver } from './shared/home-resolver.service';
 import { FiltersComponent } from './filters/filters.component';
 import { ActionPanelComponent } from './action-panel/action-panel.component';
+import { store, IAppState } from './store';
+import { StatActions } from './store';
 
 
 @NgModule({
@@ -36,11 +39,13 @@ import { ActionPanelComponent } from './action-panel/action-panel.component';
     HttpModule,
     BrowserAnimationsModule,
     MaterialModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgReduxModule
   ],
   providers: [
     ApiService,
     HomeResolver,
+    StatActions,
     LoaderService,
         {
             provide: HttpService,
@@ -50,4 +55,8 @@ import { ActionPanelComponent } from './action-panel/action-panel.component';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+  constructor(ngRedux: NgRedux<IAppState>){
+    ngRedux.provideStore(store);
+  }
+}

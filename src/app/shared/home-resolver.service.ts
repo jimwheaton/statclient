@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Resolve } from '@angular/router';
 import { ApiService } from "./api.service";
+import { StatActions} from "../store";
 
 @Injectable()
 export class HomeResolver implements Resolve<any>{
-    constructor(private api:ApiService) {}
+    constructor(private actions:StatActions) {}
     resolve() {
-        return this.api.getLookups().map(lookups => lookups);
+        return this.actions.getLookups();
     }
 }

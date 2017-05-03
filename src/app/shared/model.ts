@@ -1,5 +1,4 @@
-export interface IRankingResult {
-
+export interface IRanking {
     site:string;
     device:string;
     market:string;

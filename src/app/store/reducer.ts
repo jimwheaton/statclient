@@ -1,6 +1,13 @@
-import { IRankingResult } from '../shared/model';
+import { IRanking } from '../shared/model';
 import { IAppState } from './IAppState';
-import { CHANGE_SITE, CHANGE_KEYWORD, CHANGE_DEVICE, CHANGE_END_DATE, CHANGE_MARKET, CHANGE_START_DATE } from './actions';
+import { CHANGE_SITE, 
+    CHANGE_KEYWORD, 
+    CHANGE_DEVICE, 
+    CHANGE_END_DATE, 
+    CHANGE_MARKET, 
+    CHANGE_START_DATE,
+    GET_RANKINGS_SUCCESS,
+    GET_LOOKUPS_SUCCESS } from './actions';
 
 const courses = [];
 
@@ -16,8 +23,8 @@ const initialState: IAppState = {
     site: "",
     startDate: "",
     endDate: "",
-    rankingResults: new Array<IRankingResult>(),
-    weightedRankingResults: new Array<IRankingResult>()
+    rankings: new Array<IRanking>(),
+    weightedRankings: new Array<IRanking>()
 };
 
 function changeSite(state: IAppState, action) {
@@ -46,13 +53,31 @@ function changeStartDate(state: IAppState, action) {
 
 function changeEndDate(state: IAppState, action) {
     return Object.assign({}, state, {
-        startDate: action.endDate
+        endDate: action.endDate
     });
 }
 
 function changeKeyword(state: IAppState, action) {
     return Object.assign({}, state, {
-        startDate: action.keyword
+        keyword: action.keyword
+    });
+}
+
+function storeRankings(state: IAppState, action, weighted:boolean) {
+    let rankings = weighted 
+        ? { rankingsWeighted: action.rankings }
+        : { rankings: action.rankings };
+    return Object.assign({}, state, rankings);
+}
+
+function storeLookups(state: IAppState, action) {
+    let l = action.lookups;
+    return Object.assign({}, state, {
+        sites: l.sites,
+        markets: l.markets,
+        devices: l.devices,
+        dates: l.dates,
+        keywords: l.keywords
     });
 }
 
@@ -70,6 +95,10 @@ export function reducer(state = initialState, action) {
             return changeEndDate(state, action);
         case CHANGE_KEYWORD:
             return changeKeyword(state, action);
+        case GET_RANKINGS_SUCCESS:
+            return storeRankings(state, action, false);
+        case GET_LOOKUPS_SUCCESS:
+            return storeLookups(state, action);
         default:
             return state;
     }
