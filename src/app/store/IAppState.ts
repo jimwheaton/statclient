@@ -12,6 +12,7 @@ export interface IAppState {
     site: string,
     startDate: string,
     endDate: string,
+    weighted: boolean,
     rankings:IRanking[],
     weightedRankings:IRanking[]
 }

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../shared/api.service';
 import { IAppState, StatActions } from '../store';
 import { NgRedux, select } from '@angular-redux/store';
 import { Observable } from 'rxjs/Observable';
@@ -10,6 +9,7 @@ const MARKET_FILTER: string = 'MARKET';
 const START_DATE_FILTER: string = 'START_DATE';
 const END_DATE_FILTER: string = 'END_DATE';
 const KEYWORD_FILTER: string = 'KEYWORD';
+const WEIGHTED_FILTER: string = 'WEIGHTED';
 
 @Component({
   selector: 'app-home',
@@ -27,10 +27,7 @@ export class HomeComponent implements OnInit {
   @select('keywords') keywords$: Observable<string[]>;
   @select('dates') dates$: Observable<string[]>;
 
-  constructor(private ngRedux: NgRedux<IAppState>,
-    private actions: StatActions,
-    private api:ApiService) {
-  }
+  constructor(private actions: StatActions) {}
 
   ngOnInit() {}
 
@@ -49,22 +46,17 @@ export class HomeComponent implements OnInit {
         return this.actions.changeStartDate(event.value);
       case END_DATE_FILTER:
         return this.actions.changeEndDate(event.value);
+      case WEIGHTED_FILTER:
+        return this.actions.changeWeighted(event.value);
     }
   }
 
-  onRankings(event) {
-    // const s = this.ngRedux.getState();
-        
-    //    this.api.getRankingsCsv(
-    //         s.site, 
-    //         s.market,
-    //         s.device,
-    //         s.startDate,
-    //         s.endDate,
-    //         s.keyword,
-    //         false,
-    //         true);
-    return this.actions.getKeywordRanks();
+  onRankings() {
+    this.actions.getKeywordRanks();
+  }
+
+  onDownload() {
+    this.actions.download();
   }
 
 }

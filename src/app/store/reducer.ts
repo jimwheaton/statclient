@@ -6,23 +6,25 @@ import { CHANGE_SITE,
     CHANGE_END_DATE, 
     CHANGE_MARKET, 
     CHANGE_START_DATE,
+    CHANGE_WEIGHTED,
     GET_RANKINGS_SUCCESS,
     GET_LOOKUPS_SUCCESS } from './actions';
 
 const courses = [];
 
 const initialState: IAppState = {
-    keywords: ["360 seo", "360i conference", "360i contact", "360i digital"], //new Array<string>(),
-    markets: ["gb", "en"],//  new Array<string>(),
-    devices:["desktop", "phone"],// new Array<string>(),
-    sites: ["STAT", "CBC"], ///new Array<string>(),
-    dates: ["Jan", "Feb"],// new Array<string>(),
+    keywords: new Array<string>(),
+    markets: new Array<string>(),
+    devices: new Array<string>(),
+    sites: new Array<string>(),
+    dates: new Array<string>(),
     keyword: "",
     market: "",
     device: "",
     site: "",
     startDate: "",
     endDate: "",
+    weighted: false,
     rankings: new Array<IRanking>(),
     weightedRankings: new Array<IRanking>()
 };
@@ -54,6 +56,12 @@ function changeStartDate(state: IAppState, action) {
 function changeEndDate(state: IAppState, action) {
     return Object.assign({}, state, {
         endDate: action.endDate
+    });
+}
+
+function changeWeighted(state: IAppState, action) {
+    return Object.assign({}, state, {
+        weighted: action.weighted
     });
 }
 
@@ -93,6 +101,8 @@ export function reducer(state = initialState, action) {
             return changeStartDate(state, action);
         case CHANGE_END_DATE:
             return changeEndDate(state, action);
+        case CHANGE_WEIGHTED:
+            return changeWeighted(state, action);
         case CHANGE_KEYWORD:
             return changeKeyword(state, action);
         case GET_RANKINGS_SUCCESS:

@@ -17,6 +17,8 @@ export class FiltersComponent implements OnInit {
   @Input() dates:string[];
 
   @Output() change:EventEmitter<any> = new EventEmitter();
+  @Output() onRankings:EventEmitter<any> = new EventEmitter();
+  @Output() onDownload:EventEmitter<any> = new EventEmitter();
 
   keywordsForAutoComplete:string[];
   keywordCtrl: FormControl;
@@ -45,6 +47,14 @@ export class FiltersComponent implements OnInit {
 
   filterChanged(filter, value) {
     this.change.emit({filter, value});    
+  }
+
+  getRankings() {
+    this.onRankings.emit();
+  }
+
+  download() {
+    this.onDownload.emit();
   }
 
 }

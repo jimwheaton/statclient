@@ -11,6 +11,8 @@ var download = require("downloadjs");
 @Injectable()
 export class ApiService {
 
+  private filename: string = "rankings";
+
   constructor(private http: HttpService) { }
 
   getLookups(): Observable<any> {
@@ -25,18 +27,29 @@ export class ApiService {
     start: string,
     end: string,
     keyword: string,
-    weighted: boolean,
-    csv: boolean): Observable<IRanking[]> {
+    weighted: boolean): Observable<IRanking[]> {
 
-    csv = true;
     let queryString: string = `?site=${site}&market=${market}&device=${device}&start=${start}&end=${end}&weighted=${weighted}&keyword=${keyword}`;
-    let asCsv = csv ? '.csv' : '';
 
-    return this.http.get(`api/rankings${asCsv}${queryString}`).map((response) => {
-      return csv 
-        ? download(response.text(), "rankings.csv", "text/csv") 
-        : <IRanking[]>response.json();
-    }).catch(this.handleError);
+    return this.http.get(`api/rankings${queryString}`)
+      .map((response) => <IRanking[]>response.json())
+      .catch(this.handleError);
+  }
+
+  downloadRankings(site: string,
+    market: string,
+    device: string,
+    start: string,
+    end: string,
+    keyword: string,
+    weighted: boolean): Observable<any> {
+
+    let queryString: string = `?site=${site}&market=${market}&device=${device}&start=${start}&end=${end}&weighted=${weighted}&keyword=${keyword}`;
+    let filename = weighted ? `${this.filename}.weighted.csv` : `${this.filename}.csv`;
+
+    return this.http.get(`api/rankings.csv${queryString}`)
+      .map((response) => download(response.text(), filename, "text/csv"))
+      .catch(this.handleError);
   }
 
   private handleError(error: Response) {
