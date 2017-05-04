@@ -54,3 +54,17 @@ There are a few quirks to be aware of when using this MVP:
 * When downloading a CSV file **it will be comma delimted**. I opted to do this as it's the format most people expect.
 * I didn't have time to improve the layout of the charts to better fit the width of the screen
 
+### Kanban board
+For simplicity, I used a Kanban board instead of a Scrum board. 
+
+The board can be found [here](https://trello.com/b/fBrbM6Of/stat-client)
+
+The stories are prioritized by their position in the column. Stories at the top are higher priority than ones at the bottom
+The columns in the boards are:
+Backlog - backlog of stories for the project. These can be fully-formed stories, half-baked ideas, or epics. Stories in this column are not scheduled to be worked on
+Approved - stories that have been fully-specified and ready to be worked on.
+In progress - stories currently being developed and tested
+Done - stories have been fully tested. All acceptance criteria met. Ready for deployment.
+In the interest of time, I have only fleshed out a few of the stories on the STAT Client board. You can open the stories for "Visualize rankings as line chart", "Filter rankings", "Import raw ranking data", and "Client shell" to see some examples.  I have also purposely put stories into the different columns so that you get a sense for how they would flow through a Kanban board (the same would apply to Scrum).
+
+
