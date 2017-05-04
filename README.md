@@ -43,7 +43,7 @@ Once you install Angular CLI, run `ng serve --prod` to point the app at the api 
 ### Using the app
 
 There are a few quirks to be aware of when using this MVP:
-
+* **Please use Chrome** as this was the only browser I tested with.
 * A keyword is required to get rankings (api doesn't require it, but the client app does).
 * There is no error checking for date ranges (ie. end_date < start_date)
 * When importing a CSV file
