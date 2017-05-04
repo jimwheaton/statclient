@@ -19,11 +19,25 @@ _Angular 2 uses a component model. Each component consists of a class (my.compon
   * provides a bridge from redux to angular
 * src/app/app.component.ts
   * basic shell
-* src/app/home.component.ts
+* src/app/home
   * the _container_ component
   * listens to UI events from _presentational_ components
   * dispatches redux actions
   * subscribes to the redux store and pushes data to _presentational_ components
+  * transforms rankings data from api to chart data format
+* src/app/filters
+  * contains controls to filter ranking data and upload a CSV
+* src/app/uploader
+  * uploads a file
+* src/app/line-chart
+  * the chart component
+* src/app/store
+  * redux store. State model, actions, reducer
+* src/app/shared
+  * app services, route definitions, and model
+* src/environments
+  * configs for prod / dev environments
+
 
 
 ### Running the app
