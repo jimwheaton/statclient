@@ -1,5 +1,5 @@
 <app-filters [keywords]="keywords$" [sites]="sites$" [markets]="markets$" [devices]="devices$" [dates]="dates$" (change)="filterChanged($event)"
-  (onRankings)="onRankings()" (onDownload)="onDownload()">
+  (onRankings)="onRankings()">
 </app-filters>
 
 <md-card class="no-data" *ngIf="!showCharts()">
