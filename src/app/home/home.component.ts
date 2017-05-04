@@ -23,7 +23,6 @@ export class HomeComponent implements OnInit {
 
   title = 'STAT Search Analytics';
   lookups: any;
-  searchEngin
   chartData:any;
   weightedChartData:any;
 
