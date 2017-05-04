@@ -2,8 +2,6 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.1. You will need to download this first. It was written in Typescript (the language Angular 2 uses). I recommend using [Visual Studio Code](https://code.visualstudio.com/) to review the project as it understands Typescript.
 
-## Project overview
-This is the api that the client app connects to. It is built using [ASP.NET Core](https://github.com/aspnet/Home) and connects to a SQL Server Express database. 
 
 ### General project structure
 
