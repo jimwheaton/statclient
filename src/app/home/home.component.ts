@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { IAppState, StatActions } from '../store';
 import { NgRedux, select } from '@angular-redux/store';
 import { Observable } from 'rxjs/Observable';
+import { IRanking, searchEngines } from '../shared/model';
+import * as _ from 'lodash';
 
 const SITE_FILTER: string = 'SITE';
 const DEVICE_FILTER: string = 'DEVICE';
@@ -18,18 +20,24 @@ const WEIGHTED_FILTER: string = 'WEIGHTED';
 })
 export class HomeComponent implements OnInit {
 
-  title = 'STAT';
+  title = 'STAT Search Analytics';
   lookups: any;
+  searchEngin
+  chartData:any;
 
   @select('sites') sites$: Observable<string[]>;
   @select('markets') markets$: Observable<string[]>;
   @select('devices') devices$: Observable<string[]>;
   @select('keywords') keywords$: Observable<string[]>;
   @select('dates') dates$: Observable<string[]>;
+  @select('rankings') rankings$: Observable<IRanking[]>
+  @select('rankingsWeighted') rankingsWeighted$: Observable<IRanking>
 
-  constructor(private actions: StatActions) {}
+  constructor(private actions: StatActions) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.rankings$.subscribe(this.buildChartData.bind(this));
+  }
 
   filterChanged(event) {
     let action;
@@ -57,6 +65,17 @@ export class HomeComponent implements OnInit {
 
   onDownload() {
     this.actions.download();
+  }
+
+  private buildChartData(rankings: IRanking[]) {
+      var bySearchEngine = rankings.reduce((acc, val: IRanking, idx) => {
+        _.map(searchEngines, (se) => (acc[se] || (acc[se] = [])).push(val[se]));
+        return acc;
+      }, {});
+      this.chartData = {
+        datasets: _.map(_.keys(bySearchEngine), k => ({ label: k, data: bySearchEngine[k]})),
+        labels: _.uniq(_.map(rankings, 'date'))
+      };
   }
 
 }

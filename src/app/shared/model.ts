@@ -29,3 +29,5 @@ export interface IKeyword {
     id:Number;
     phrase:string;
 }
+
+export const searchEngines:string[] = ["bing", "google", "googleBaseRank", "yahoo"];

@@ -6,6 +6,7 @@ import { MaterialModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgReduxModule, NgRedux } from '@angular-redux/store';
 import { FileUploadModule } from 'ng2-file-upload/ng2-file-upload';
+import { ChartsModule } from 'ng2-charts';
 
 import { HttpService } from './shared/http.service';
 import { httpServiceFactory } from './shared/http-factory.service';
@@ -22,6 +23,7 @@ import { FiltersComponent } from './filters/filters.component';
 import { store, IAppState } from './store';
 import { StatActions } from './store';
 import { UploaderComponent } from './uploader/uploader.component';
+import { LineChartComponent } from './line-chart/line-chart.component';
 
 
 @NgModule({
@@ -31,7 +33,8 @@ import { UploaderComponent } from './uploader/uploader.component';
     ErrorComponent,
     LoaderComponent,
     FiltersComponent,
-    UploaderComponent
+    UploaderComponent,
+    LineChartComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +45,8 @@ import { UploaderComponent } from './uploader/uploader.component';
     MaterialModule,
     AppRoutingModule,
     NgReduxModule,
-    FileUploadModule
+    FileUploadModule,
+    ChartsModule
   ],
   providers: [
     ApiService,

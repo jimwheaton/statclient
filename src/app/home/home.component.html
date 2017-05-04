@@ -2,6 +2,4 @@
   (onRankings)="onRankings()" (onDownload)="onDownload()">
 </app-filters>
 
-<md-card>
-  Visiualizations here
-</md-card>
+<app-line-chart *ngIf="chartData.datasets.length" [data]="chartData"></app-line-chart>
