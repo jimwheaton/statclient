@@ -30,7 +30,7 @@ _Angular 2 uses a component model. Each component consists of a class (my.compon
 * src/app/line-chart
   * the chart component
 * src/app/store
-  * redux store. State, models, actions, reducer
+  * redux store, actions, reducer
 * src/app/shared
   * app services, route definitions, and model
 * src/environments
