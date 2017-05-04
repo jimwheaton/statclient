@@ -47,7 +47,7 @@
     </div>
 
     <div class="app-filter-control">
-      <button md-raised-button color="primary" (click)="getRankings()">Get Rankings</button>
+      <button md-raised-button color="primary" (click)="getRankings()" [disabled]="disableRankingsActions()">Get Rankings</button>
     </div>
     <div class="app-filter-control">
       <button md-raised-button color="accent" (click)="download()">Get Rankings as CSV</button>

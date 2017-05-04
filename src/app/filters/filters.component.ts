@@ -57,4 +57,8 @@ export class FiltersComponent implements OnInit {
     this.onDownload.emit();
   }
 
+  disableRankingsActions() {
+    return !this.keywordCtrl.value;
+  }
+
 }

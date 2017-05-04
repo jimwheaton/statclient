@@ -85,7 +85,7 @@ function storeLookups(state: IAppState, action) {
         markets: ['', ...l.markets],
         devices: ['', ...l.devices],
         dates: ['', ...l.dates],
-        keywords: ['', ...l.keywords]
+        keywords: l.keywords
     });
 }
 

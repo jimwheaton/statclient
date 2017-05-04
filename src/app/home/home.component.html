@@ -1,10 +1,6 @@
 <app-filters [keywords]="keywords$" [sites]="sites$" [markets]="markets$" [devices]="devices$" [dates]="dates$" (change)="filterChanged($event)"
   (onRankings)="onRankings()" (onDownload)="onDownload()">
 </app-filters>
-
- <md-grid-list cols="12">
-
-
 <app-line-chart *ngIf="chartData.datasets.length" [data]="chartData"></app-line-chart>
 
 
