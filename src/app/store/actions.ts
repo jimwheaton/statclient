@@ -9,7 +9,6 @@ export const CHANGE_DEVICE = 'CHANGE_DEVICE';
 export const CHANGE_MARKET = 'CHANGE_MARKET';
 export const CHANGE_START_DATE = 'CHANGE_START_DATE';
 export const CHANGE_END_DATE = 'CHANGE_END_DATE';
-export const CHANGE_WEIGHTED = 'CHANGE_WEIGHTED';
 export const GET_RANKINGS_SUCCESS = 'GET_RANKINGS_SUCCESS';
 export const GET_LOOKUPS_SUCCESS = 'GET_LOOKUPS_SUCCESS';
 
@@ -60,13 +59,6 @@ export class StatActions {
         });
     }
 
-    changeWeighted(weighted: boolean) {
-        this.ngRedux.dispatch({
-            type: CHANGE_WEIGHTED,
-            weighted
-        });
-    }
-
     getLookups() {
         return this.api.getLookups()
             .subscribe(lookups => {
@@ -86,8 +78,7 @@ export class StatActions {
             s.device,
             s.startDate,
             s.endDate,
-            s.keyword,
-            s.weighted)
+            s.keyword)
             .subscribe(rankings => {
                 this.ngRedux.dispatch({
                     type: GET_RANKINGS_SUCCESS,
@@ -96,7 +87,7 @@ export class StatActions {
             });
     }
 
-    download() {
+    download(weighted:boolean) {
         const s = this.ngRedux.getState();
 
         return this.api.downloadRankings(
@@ -106,6 +97,6 @@ export class StatActions {
             s.startDate,
             s.endDate,
             s.keyword,
-            s.weighted).subscribe((f) => f);
+            weighted).subscribe((f) => f);
     }
 }

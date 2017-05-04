@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, ViewChild } from '@angular/core';
+import { Component, Input, OnChanges, ViewChild, Output, EventEmitter } from '@angular/core';
 import { BaseChartDirective } from 'ng2-charts';
 
 @Component({
@@ -10,7 +10,7 @@ export class LineChartComponent implements OnChanges {
 
   @Input() data:any;
   @ViewChild(BaseChartDirective) _chart;
-
+  
   public lineChartOptions:any = {
     responsive: true
   };

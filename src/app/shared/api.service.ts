@@ -6,8 +6,6 @@ import { IRanking, ISite, IDevice, IMarket, IKeyword } from './model';
 declare var require: any
 var download = require("downloadjs");
 
-
-
 @Injectable()
 export class ApiService {
 
@@ -26,14 +24,19 @@ export class ApiService {
     device: string,
     start: string,
     end: string,
-    keyword: string,
-    weighted: boolean): Observable<IRanking[]> {
+    keyword: string): Observable<IRanking[]> {
 
-    let queryString: string = `?site=${site}&market=${market}&device=${device}&start=${start}&end=${end}&weighted=${weighted}&keyword=${keyword}`;
+    let queryString: string = `?site=${site}&market=${market}&device=${device}&start=${start}&end=${end}&weighted=false&keyword=${keyword}`;
+    let queryStringWeighted: string = `?site=${site}&market=${market}&device=${device}&start=${start}&end=${end}&weighted=true&keyword=${keyword}`;
 
-    return this.http.get(`api/rankings${queryString}`)
-      .map((response) => <IRanking[]>response.json())
-      .catch(this.handleError);
+    return Observable.forkJoin(
+      this.http.get(`api/rankings${queryString}`)
+        .map((response) => <IRanking[]>response.json())
+        .catch(this.handleError),
+      this.http.get(`api/rankings${queryStringWeighted}`)
+        .map((response) => <IRanking[]>response.json())
+        .catch(this.handleError)
+    );
   }
 
   downloadRankings(site: string,

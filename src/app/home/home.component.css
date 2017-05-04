@@ -1,0 +1,23 @@
+canvas {
+    margin-top:600px;
+}
+
+md-card.no-data {
+    margin-top:10px;
+}
+
+md-card-title h4 {
+    display: inline;
+    color: white;
+    font-size: 20px;
+    font-weight: 500;
+    font-family: Roboto,"Helvetica Neue",sans-serif;
+}
+
+md-card-title button {
+    float:right;
+}
+
+.chart-container {
+    display: inline-block;
+}

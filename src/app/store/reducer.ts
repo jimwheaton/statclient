@@ -6,7 +6,6 @@ import { CHANGE_SITE,
     CHANGE_END_DATE, 
     CHANGE_MARKET, 
     CHANGE_START_DATE,
-    CHANGE_WEIGHTED,
     GET_RANKINGS_SUCCESS,
     GET_LOOKUPS_SUCCESS } from './actions';
 
@@ -24,7 +23,6 @@ const initialState: IAppState = {
     site: "",
     startDate: "",
     endDate: "",
-    weighted: false,
     rankings: new Array<IRanking>(),
     weightedRankings: new Array<IRanking>()
 };
@@ -59,12 +57,6 @@ function changeEndDate(state: IAppState, action) {
     });
 }
 
-function changeWeighted(state: IAppState, action) {
-    return Object.assign({}, state, {
-        weighted: action.weighted
-    });
-}
-
 function changeKeyword(state: IAppState, action) {
     return Object.assign({}, state, {
         keyword: action.keyword
@@ -72,11 +64,14 @@ function changeKeyword(state: IAppState, action) {
 }
 
 function storeRankings(state: IAppState, action, weighted:boolean) {
-    let rankings = weighted 
-        ? { rankingsWeighted: action.rankings }
-        : { rankings: action.rankings };
+    let rankings = { 
+        rankings: action.rankings[0],
+        weightedRankings: action.rankings[1]
+    };
+
     return Object.assign({}, state, rankings);
 }
+
 
 function storeLookups(state: IAppState, action) {
     let l = action.lookups;
@@ -101,8 +96,6 @@ export function reducer(state = initialState, action) {
             return changeStartDate(state, action);
         case CHANGE_END_DATE:
             return changeEndDate(state, action);
-        case CHANGE_WEIGHTED:
-            return changeWeighted(state, action);
         case CHANGE_KEYWORD:
             return changeKeyword(state, action);
         case GET_RANKINGS_SUCCESS:

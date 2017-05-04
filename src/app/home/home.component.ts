@@ -25,6 +25,7 @@ export class HomeComponent implements OnInit {
   lookups: any;
   searchEngin
   chartData:any;
+  weightedChartData:any;
 
   @select('sites') sites$: Observable<string[]>;
   @select('markets') markets$: Observable<string[]>;
@@ -32,12 +33,19 @@ export class HomeComponent implements OnInit {
   @select('keywords') keywords$: Observable<string[]>;
   @select('dates') dates$: Observable<string[]>;
   @select('rankings') rankings$: Observable<IRanking[]>
-  @select('rankingsWeighted') rankingsWeighted$: Observable<IRanking>
+  @select('weightedRankings') weightedRankings$: Observable<IRanking[]>
 
   constructor(private actions: StatActions) { }
 
   ngOnInit() {
-    this.rankings$.subscribe(this.buildChartData.bind(this));
+    var buildChartData = this.getChartData.bind(this);
+    this.rankings$.subscribe(rankings => this.chartData = buildChartData(rankings));
+    this.weightedRankings$.subscribe(rankings => this.weightedChartData = buildChartData(rankings));
+  }
+
+  showCharts() {
+    let chartHasData = (chart) => chart && chart.datasets && chart.datasets.length;
+    return chartHasData(this.chartData) && chartHasData(this.weightedChartData);
   }
 
   filterChanged(event) {
@@ -55,8 +63,6 @@ export class HomeComponent implements OnInit {
         return this.actions.changeStartDate(event.value);
       case END_DATE_FILTER:
         return this.actions.changeEndDate(event.value);
-      case WEIGHTED_FILTER:
-        return this.actions.changeWeighted(event.value);
     }
   }
 
@@ -64,16 +70,16 @@ export class HomeComponent implements OnInit {
     this.actions.getKeywordRanks();
   }
 
-  onDownload() {
-    this.actions.download();
+  download(weighted:boolean) {
+    this.actions.download(weighted);
   }
 
-  private buildChartData(rankings: IRanking[]) {
+  private getChartData(rankings: IRanking[]) {
       var bySearchEngine = rankings.reduce((acc, val: IRanking, idx) => {
         _.map(searchEngines, (se) => (acc[se] || (acc[se] = [])).push(val[se]));
         return acc;
       }, {});
-      this.chartData = {
+      return {
         datasets: _.map(_.keys(bySearchEngine), k => ({ label: k, data: bySearchEngine[k]})),
         labels: _.map(_.uniq(_.map(rankings, r => r.date)), d => moment(d).format('YYYY-MM-DD'))
       };

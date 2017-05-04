@@ -1,7 +1,33 @@
 <app-filters [keywords]="keywords$" [sites]="sites$" [markets]="markets$" [devices]="devices$" [dates]="dates$" (change)="filterChanged($event)"
   (onRankings)="onRankings()" (onDownload)="onDownload()">
 </app-filters>
-<app-line-chart *ngIf="chartData.datasets.length" [data]="chartData"></app-line-chart>
 
+<md-card class="no-data" *ngIf="!showCharts()">
+  No data for selected filters
+</md-card>
 
+<div class="chart" *ngIf="showCharts()">
+  <div class="chart-container">
+    <md-card>
+      <md-card-title>
+        <h4>Rankings</h4>
+        <button md-raised-button color="accent" (click)="download(false)"><i class="material-icons">file_download</i></button>
+      </md-card-title>
+      <md-card-content>
+        <app-line-chart [data]="chartData"></app-line-chart>
+      </md-card-content>
+    </md-card>
+  </div>
 
+  <div class="chart-container">
+    <md-card>
+      <md-card-title>
+        <h4>Weighted Rankings</h4>
+        <button md-raised-button color="accent" (click)="download(true)"><i class="material-icons">file_download</i></button>
+      </md-card-title>
+      <md-card-content>
+        <app-line-chart [data]="weightedChartData"></app-line-chart>
+      </md-card-content>
+    </md-card>
+  </div>
+</div>
