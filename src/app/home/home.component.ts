@@ -4,6 +4,7 @@ import { NgRedux, select } from '@angular-redux/store';
 import { Observable } from 'rxjs/Observable';
 import { IRanking, searchEngines } from '../shared/model';
 import * as _ from 'lodash';
+import * as moment from 'moment';
 
 const SITE_FILTER: string = 'SITE';
 const DEVICE_FILTER: string = 'DEVICE';
@@ -74,7 +75,7 @@ export class HomeComponent implements OnInit {
       }, {});
       this.chartData = {
         datasets: _.map(_.keys(bySearchEngine), k => ({ label: k, data: bySearchEngine[k]})),
-        labels: _.uniq(_.map(rankings, 'date'))
+        labels: _.map(_.uniq(_.map(rankings, r => r.date)), d => moment(d).format('YYYY-MM-DD'))
       };
   }
 
