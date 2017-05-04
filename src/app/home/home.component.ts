@@ -48,7 +48,6 @@ export class HomeComponent implements OnInit {
   }
 
   filterChanged(event) {
-    let action;
     switch (event.filter) {
       case SITE_FILTER:
         return this.actions.changeSite(event.value);
