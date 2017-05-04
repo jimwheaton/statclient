@@ -1,4 +1,4 @@
-# Stat client
+# STAT client
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.1. You will need to download this first. It was written in Typescript (the language Angular 2 uses). I recommend using [Visual Studio Code](https://code.visualstudio.com/) to review the project as it understands Typescript.
 
