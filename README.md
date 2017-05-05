@@ -38,7 +38,7 @@ _Angular 2 uses a component model. Each component consists of a class (my.compon
 
 ### Running the app
 
-Once you install Angular CLI, run `ng serve --prod` to point the app at the api running on Azure. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Once you install Angular CLI, `cd` into the project folder and run `npm install`. Once packages are installed, run `ng serve --prod` to point the app at the api running on Azure. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ### Using the app
 
